@@ -29,7 +29,7 @@ const LoginPage = ({ setPage, setPhoneNumber }) => {
       <div className="login-card">
         <div className="login-header">
           <Smartphone className="login-icon" />
-          <h1 className="login-title">Welcome to PhotoSense</h1>
+          <h1 className="login-title">Welcome to PhotoGuard</h1>
           <p className="login-subtitle">Start your personalized photosensitivity assessment.</p>
         </div>
         <form onSubmit={handleLogin} className="login-form">

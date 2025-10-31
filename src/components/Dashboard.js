@@ -2,12 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { XCircle, CheckCircle, Mail } from 'lucide-react';
 import DashboardCard from '../components/DashboardCard';
-import VideoCard from '../components/VideoCard';
+import VideoCard from '../pages/VideoCard';
 import './Dashboard.css';
 
 const Dashboard = ({ onClose, phone }) => {
   const sidebarVariants = {
-    hidden: { x: '100%' },
+    hidden: { x: '-100%' }, // Changed from right to left
     visible: { x: 0 },
   };
 
