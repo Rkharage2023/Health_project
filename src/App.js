@@ -120,92 +120,91 @@ const App = () => {
     console.log('==================');
   }, [phoneNumber, isProfileCompleted, page, activeTab]);
 
-  const renderPage = useCallback(() => {
-    switch (page) {
-      case 'splash':
-        return <SplashScreen onComplete={handleSplashComplete} />;
-      case 'login':
-        return <LoginPage setPage={handlePageChange} setPhoneNumber={setPhoneNumber} />;
-      case 'main':
-        return (
-          <div className="app-container">
-            <Navbar activeTab={activeTab} setActiveTab={handleTabChange} />
-            <main className="main-content">
-              <AnimatePresence mode="wait">
-                {activeTab === 'home' && (
-                  <motion.div
-                    key="home"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <HomePage setPage={handlePageChange} setQuizAnswers={setQuizAnswers} />
-                  </motion.div>
-                )}
-                {activeTab === 'videos' && (
-                  <motion.div
-                    key="videos"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <VideosPage />
-                  </motion.div>
-                )}
-                {activeTab === 'profile' && (
-                  <motion.div
-                    key="profile"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <ProfilePage setPage={handlePageChange} onProfileComplete={handleProfileCompletion} />
-                  </motion.div>
-                )}
-                {activeTab === 'drug-allergy' && (
-                  <motion.div
-                    key="drug-allergy"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    {/* Add your DrugAllergy component here */}
-                    <div>Drug Allergy Page - To be implemented</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </main>
-          </div>
-        );
-      case 'quiz':
-        // Check if profile is completed before allowing quiz
-        if (!isProfileCompleted) {
-          setPage('main');
-          setActiveTab('profile');
-          return null;
+        const renderPage = useCallback(() => {
+        switch (page) {
+          case 'splash':
+            return <SplashScreen onComplete={handleSplashComplete} />;
+          case 'login':
+            return <LoginPage setPage={handlePageChange} setPhoneNumber={setPhoneNumber} />;
+          case 'main':
+            return (
+              <div className="app-container">
+                <Navbar activeTab={activeTab} setActiveTab={handleTabChange} />
+                <main className="main-content">
+                  <AnimatePresence mode="wait">
+                    {activeTab === 'home' && (
+                      <motion.div
+                        key="home"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <HomePage setPage={handlePageChange} setQuizAnswers={setQuizAnswers} />
+                      </motion.div>
+                    )}
+                    {activeTab === 'videos' && (
+                      <motion.div
+                        key="videos"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <VideosPage />
+                      </motion.div>
+                    )}
+                    {activeTab === 'profile' && (
+                      <motion.div
+                        key="profile"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <ProfilePage setPage={handlePageChange} onProfileComplete={handleProfileCompletion} />
+                      </motion.div>
+                    )}
+                    {activeTab === 'drug-allergy' && (
+                      <motion.div
+                        key="drug-allergy"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        {/* Add your DrugAllergy component here */}
+                        <div>Drug Allergy Page - To be implemented</div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </main>
+              </div>
+            );
+          case 'quiz':
+            // Check if profile is completed before allowing quiz
+            if (!isProfileCompleted) {
+              setPage('main');
+              setActiveTab('profile');
+              return null;
+            }
+            return <QuestionnairePage setPage={handlePageChange} quizAnswers={quizAnswers} setQuizAnswers={setQuizAnswers} />;
+          case 'result':
+            return <ResultPage setPage={handlePageChange} quizAnswers={quizAnswers} />;
+          default:
+            return (
+              <div className="app-container">
+                <Navbar activeTab={activeTab} setActiveTab={handleTabChange} />
+                <main className="main-content">
+                  <HomePage setPage={handlePageChange} setQuizAnswers={setQuizAnswers} />
+                </main>
+              </div>
+            );
         }
-        return <QuestionnairePage setPage={handlePageChange} quizAnswers={quizAnswers} setQuizAnswers={setQuizAnswers} />;
-      case 'result':
-        return <ResultPage setPage={handlePageChange} quizAnswers={quizAnswers} />;
-      default:
+      }, [page, activeTab, quizAnswers, isProfileCompleted, handleSplashComplete, handleTabChange, handlePageChange, handleProfileCompletion]);
         return (
-          <div className="app-container">
-            <Navbar activeTab={activeTab} setActiveTab={handleTabChange} />
-            <main className="main-content">
-              <HomePage setPage={handlePageChange} setQuizAnswers={setQuizAnswers} />
-            </main>
+          <div className="font-sans min-h-screen">
+            <AnimatePresence mode="wait">
+              {renderPage()}
+            </AnimatePresence>
           </div>
         );
-    }
-  }, [page, activeTab, phoneNumber, quizAnswers, isProfileCompleted, handleSplashComplete, handleTabChange, handlePageChange, handleProfileCompletion]);
-
-  return (
-    <div className="font-sans min-h-screen">
-      <AnimatePresence mode="wait">
-        {renderPage()}
-      </AnimatePresence>
-    </div>
-  );
-};
+      };
 
 export default App;
