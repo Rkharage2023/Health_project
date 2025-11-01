@@ -2,7 +2,7 @@
   "name": "my-health-app",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://Rkharage2023.github.io/my-health-app",
+  "homepage": "https://photoguardnew.netlify.app",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.16",
     "@testing-library/dom": "^10.4.1",
