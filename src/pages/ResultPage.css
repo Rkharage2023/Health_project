@@ -297,3 +297,68 @@
     font-size: var(--text-3xl);
   }
 }
+
+/* Add these styles to your existing ResultPage.css */
+
+.medications-section {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid #10b981;
+}
+
+.medications-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.medications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.medication-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.medication-item:last-child {
+  border-bottom: none;
+}
+
+.medication-disclaimer {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.medical-warning {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fef3cd;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .medications-section {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .medication-item {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+  }
+}

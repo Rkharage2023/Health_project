@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Video, User, Menu, Stethoscope } from 'lucide-react';
+import { Home, Video, User, Menu, Stethoscope, AlertTriangle } from 'lucide-react';
 import Dashboard from './Dashboard';
 import './Navbar.css';
 
@@ -11,7 +11,8 @@ const Navbar = ({ activeTab, setActiveTab }) => {
   const tabs = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'videos', label: 'Videos', icon: Video },
-    { id: 'profile', label: 'Profile', icon: User }
+    { id: 'profile', label: 'Profile', icon: User },
+    { id: 'food-drug-allergy', label: 'Food Drug Allergy', icon: AlertTriangle }
   ];
 
   const handleTabClick = (tabId) => {

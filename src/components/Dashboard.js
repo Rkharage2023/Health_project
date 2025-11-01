@@ -33,7 +33,9 @@ const Dashboard = ({ onClose, phone }) => {
       </div>
 
       <p className="dashboard-welcome">
-        Welcome, user ending in **{phone.slice(-4)}**.
+        <h1 >
+        Welcome.
+        </h1>
       </p>
 
       <h3 className="section-title primary-section">Primary Protection</h3>

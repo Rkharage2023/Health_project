@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, MessageCircle, Star, Shield, Leaf, Bell } from 'lucide-react';
 import './HomePage.css';
@@ -7,6 +7,7 @@ const HomePage = ({ setPage, setQuizAnswers }) => {
   const [notificationsEnabled, setNotificationsEnabled] = React.useState(false);
 
   const startTest = () => {
+    // Let App.js handle the profile check
     setQuizAnswers([]);
     setPage('quiz');
   };
@@ -46,12 +47,8 @@ const HomePage = ({ setPage, setQuizAnswers }) => {
 
         {/* Traya Plan Section */}
         <div className="traya-plan-section">
-          <h2 className="section-title">Traya Plan Includes</h2>
+          <h2 className="section-title">PhotoGuard Plan Includes</h2>
           <div className="plan-features">
-            <div className="plan-feature">
-              <div className="feature-icon">1️⃣</div>
-              <span>1 month kit</span>
-            </div>
             <div className="plan-feature">
               <div className="feature-icon">👨‍⚕️</div>
               <span>Skin coach support</span>
