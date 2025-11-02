@@ -8,6 +8,8 @@
   padding: var(--space-6);
   position: relative;
   overflow: hidden;
+    padding-top: 60px;
+
 }
 
 .login-container::before {
