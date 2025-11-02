@@ -1,0 +1,110 @@
+.drug-allergy-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.drug-allergy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.drug-allergy-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.drug-allergy-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.drug-allergy-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.allergy-section {
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.info-space {
+  min-height: 100px;
+  background: white;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-style: italic;
+}
+
+.interactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.interaction-item {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border-left: 3px solid #10b981;
+}
+
+.interaction-point {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #059669;
+  margin-bottom: 0.5rem;
+}
+
+.interaction-detail {
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .drug-allergy-container {
+    padding: 1rem;
+  }
+  
+  .drug-allergy-content {
+    padding: 1.5rem;
+  }
+  
+  .drug-allergy-title {
+    font-size: 2rem;
+  }
+  
+  .allergy-section {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+}

@@ -7,6 +7,7 @@ import ProfilePage from './pages/Profilepage';
 import VideosPage from './pages/VideoCard';
 import QuestionnairePage from './pages/QuestionnairePage';
 import ResultPage from './pages/ResultPage';
+import DrugAllergy from './pages/DrugAllergy';
 import Navbar from './components/Navbar';
 import './styles/globals.css';
 
@@ -163,16 +164,15 @@ const App = () => {
                       </motion.div>
                     )}
                     {activeTab === 'drug-allergy' && (
-                      <motion.div
-                        key="drug-allergy"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        {/* Add your DrugAllergy component here */}
-                        <div>Drug Allergy Page - To be implemented</div>
-                      </motion.div>
-                    )}
+                    <motion.div
+                      key="drug-allergy"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <DrugAllergy />
+                    </motion.div>
+                  )}
                   </AnimatePresence>
                 </main>
               </div>

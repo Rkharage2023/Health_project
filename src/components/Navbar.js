@@ -12,7 +12,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
     { id: 'home', label: 'Home', icon: Home },
     { id: 'videos', label: 'Videos', icon: Video },
     { id: 'profile', label: 'Profile', icon: User },
-    { id: 'food-drug-allergy', label: 'Food Drug Allergy', icon: AlertTriangle }
+    { id: 'drug-allergy', label: 'Food Drug Allergy', icon: AlertTriangle }
   ];
 
   const handleTabClick = (tabId) => {
