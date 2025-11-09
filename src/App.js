@@ -17,6 +17,7 @@ const App = () => {
   const [phoneNumber, setPhoneNumber] = useState(localStorage.getItem('phone') || '');
   const [quizAnswers, setQuizAnswers] = useState([]);
   const [isProfileCompleted, setIsProfileCompleted] = useState(false);
+  const [userRole, setUserRole] = useState('user');
 
   // Check profile completion status
   useEffect(() => {
@@ -126,7 +127,13 @@ const App = () => {
           case 'splash':
             return <SplashScreen onComplete={handleSplashComplete} />;
           case 'login':
-            return <LoginPage setPage={handlePageChange} setPhoneNumber={setPhoneNumber} />;
+            return (
+          <LoginPage 
+            setPage={handlePageChange} 
+            setPhoneNumber={setPhoneNumber}
+            setUserRole={setUserRole} // Updated with setUserRole
+          />
+        );
           case 'main':
             return (
               <div className="app-container">
@@ -140,7 +147,11 @@ const App = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                       >
-                        <HomePage setPage={handlePageChange} setQuizAnswers={setQuizAnswers} />
+                        <HomePage 
+                      setPage={handlePageChange} 
+                      setQuizAnswers={setQuizAnswers}
+                      userRole={userRole} // Updated with userRole
+                    />
                       </motion.div>
                     )}
                     {activeTab === 'videos' && (
@@ -197,7 +208,7 @@ const App = () => {
               </div>
             );
         }
-      }, [page, activeTab, quizAnswers, isProfileCompleted, handleSplashComplete, handleTabChange, handlePageChange, handleProfileCompletion]);
+      },[page, activeTab, quizAnswers, isProfileCompleted, handleSplashComplete, handleTabChange, handlePageChange, handleProfileCompletion, userRole]); 
         return (
           <div className="font-sans min-h-screen">
             <AnimatePresence mode="wait">

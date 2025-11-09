@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Home, RefreshCw } from 'lucide-react';
+import { CheckCircle, Home, RefreshCw, Phone, MessageCircle } from 'lucide-react';
 import './ResultPage.css';
 
 const STAGE_MAPPING = {
@@ -29,7 +29,7 @@ const STAGE_MAPPING = {
     ]
   },
   severe: {
-    range: "11–15 Yes answers",
+    range: "11–13 Yes answers",
     stage: "Stage 3 (Severe Photosensitivity)",
     color: "result-severe",
     bgColor: "result-bg-severe",
@@ -39,6 +39,14 @@ const STAGE_MAPPING = {
       "Diphenhydramine (Benadryl) - 25 mg at night (causes drowsiness - avoid driving)"
     ]
   },
+  critical: {
+    range: "14–15 Yes answers",
+    stage: "Stage 4 (Critical Photosensitivity)",
+    color: "result-critical",
+    bgColor: "result-bg-critical",
+    treatment: "Your responses indicate critical photosensitivity requiring immediate medical attention. Please contact a healthcare professional immediately for proper diagnosis and treatment.",
+    medications: []
+  }
 };
 
 const ResultPage = ({ setPage, quizAnswers }) => {
@@ -49,12 +57,39 @@ const ResultPage = ({ setPage, quizAnswers }) => {
     result = STAGE_MAPPING.mild;
   } else if (yesCount <= 10) {
     result = STAGE_MAPPING.moderate;
-  } else {
+  } else if (yesCount <= 13) {
     result = STAGE_MAPPING.severe;
+  } else {
+    result = STAGE_MAPPING.critical;
   }
 
   const handleGoHome = () => setPage('home');
   const handleRetake = () => setPage('quiz');
+
+  // Contact functions
+  const handleCallDoctor = () => {
+    const phoneNumber = "+1234567890"; // Replace with actual doctor's number
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Mobile device
+      window.location.href = `tel:${phoneNumber}`;
+    } else {
+      // PC - show number and instructions
+      alert(`Please call: ${phoneNumber}\n\nOn mobile devices, this would automatically open your dialer.`);
+    }
+  };
+
+  const handleMessageDoctor = () => {
+    const phoneNumber = "+1234567890"; // Replace with actual doctor's number
+    const message = "Hello, I need to schedule an appointment regarding photosensitivity concerns from the assessment.";
+    
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Mobile device
+      window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+    } else {
+      // PC - show instructions
+      alert(`To message the doctor:\n\nNumber: ${phoneNumber}\nMessage: ${message}\n\nOn mobile devices, this would automatically open your messaging app.`);
+    }
+  };
 
   return (
     <motion.div
@@ -82,27 +117,64 @@ const ResultPage = ({ setPage, quizAnswers }) => {
           <h3 className="treatment-title">Suggested Next Steps</h3>
           <p className="treatment-text">{result.treatment}</p>
           
-          <div className="medications-section">
-            <h4 className="medications-title">
-              {result === STAGE_MAPPING.mild ? "Topical Options (Over-the-counter):" : "Oral OTC Options (for itching or allergic-type reaction):"}
-            </h4>
-            <ul className="medications-list">
-              {result.medications.map((medication, index) => (
-                <li key={index} className="medication-item">
-                  {medication}
-                </li>
-              ))}
-            </ul>
-            <p className="medication-disclaimer">
-              {result === STAGE_MAPPING.mild 
-                ? "These can help with sunburn-like symptoms, itching, redness, and inflammation."
-                : "These antihistamines help if the photosensitivity has an allergic or rash component."
-              }
-            </p>
-            <p className="medical-warning">
-              ⚠️ Always consult with a healthcare professional before starting any new medication.
-            </p>
-          </div>
+          {result === STAGE_MAPPING.critical ? (
+            <div className="critical-contact-section">
+              <div className="doctor-info">
+                <h4 className="contact-title">🚨 Immediate Medical Attention Recommended</h4>
+                <p className="contact-message">
+                  Based on your assessment results, we strongly recommend contacting a healthcare professional immediately for proper diagnosis and treatment.
+                </p>
+                
+                <div className="contact-options">
+                  <motion.button
+                    onClick={handleCallDoctor}
+                    className="contact-button call-button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Phone size={20} className="button-icon" />
+                    Call Healthcare Provider
+                  </motion.button>
+                  
+                  <motion.button
+                    onClick={handleMessageDoctor}
+                    className="contact-button message-button"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <MessageCircle size={20} className="button-icon" />
+                    Message Healthcare Provider
+                  </motion.button>
+                </div>
+                
+                <p className="contact-disclaimer">
+                  Note: These contact options will connect you with our recommended healthcare provider. On mobile devices, they will open your phone dialer and messaging app automatically.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="medications-section">
+              <h4 className="medications-title">
+                {result === STAGE_MAPPING.mild ? "Topical Options (Over-the-counter):" : "Oral OTC Options (for itching or allergic-type reaction):"}
+              </h4>
+              <ul className="medications-list">
+                {result.medications.map((medication, index) => (
+                  <li key={index} className="medication-item">
+                    {medication}
+                  </li>
+                ))}
+              </ul>
+              <p className="medication-disclaimer">
+                {result === STAGE_MAPPING.mild 
+                  ? "These can help with sunburn-like symptoms, itching, redness, and inflammation."
+                  : "These antihistamines help if the photosensitivity has an allergic or rash component."
+                }
+              </p>
+              <p className="medical-warning">
+                ⚠️ Always consult with a healthcare professional before starting any new medication.
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="action-buttons">
