@@ -5,11 +5,32 @@ import DashboardCard from '../components/DashboardCard';
 import VideoCard from '../pages/VideoCard';
 import './Dashboard.css';
 
+// Import your local images
+import certification1 from '../assets/certificate 1.jpg';
+import certification2 from '../assets/certificate 2.jpg';
+import certification3 from '../assets/certificate 3.jpg';
+
 const Dashboard = ({ onClose, phone }) => {
   const sidebarVariants = {
-    hidden: { x: '-100%' }, // Changed from right to left
+    hidden: { x: '-100%' },
     visible: { x: 0 },
   };
+
+  // Use imported local images
+  const certificationImages = [
+    {
+      src: certification1,
+      alt: "Dermatology Certification"
+    },
+    {
+      src: certification2,
+      alt: "Clinical Laboratory Certification"
+    },
+    {
+      src: certification3,
+      alt: "Professional Training Certificate"
+    }
+  ];
 
   return (
     <motion.div
@@ -33,9 +54,7 @@ const Dashboard = ({ onClose, phone }) => {
       </div>
 
       <p className="dashboard-welcome">
-        <h1 >
-        Welcome.
-        </h1>
+        <h1>Welcome.</h1>
       </p>
 
       <h3 className="section-title primary-section">Primary Protection</h3>
@@ -56,9 +75,10 @@ const Dashboard = ({ onClose, phone }) => {
       <div className="achievements-section">
         <DashboardCard
           title="Clinical Certification"
-          content="Certified specialist in Dermatological Photodetection."
+          content="Certified specialist in Dermatological Photodetection with advanced training in photosensitivity management."
           icon={CheckCircle}
           color="text-green-500"
+          images={certificationImages}
         />
         <DashboardCard
           title="5000+ Consultations"
