@@ -64,11 +64,6 @@ const Dashboard = ({ onClose, phone }) => {
           src="https://www.youtube.com/embed/g2qFq-uS7aE"
           description="A quick guide to broad-spectrum protection and SPF rating."
         />
-        <VideoCard
-          title="Managing Drug-Induced Photosensitivity"
-          src="https://www.youtube.com/embed/n3H-l7Q9-2U"
-          description="Tips for patients on light-sensitizing medications."
-        />
       </div>
 
       <h3 className="section-title achievement-section">Pharmacy Achievements</h3>

@@ -49,6 +49,13 @@ const STAGE_MAPPING = {
   }
 };
 
+// Doctor information
+const DOCTOR_INFO = {
+  name: "Dr. Shankar Mahajan",
+  clinic: "Mahajan Hospital (Sangli)",
+  phone: "+919156403142"
+};
+
 const ResultPage = ({ setPage, quizAnswers }) => {
   const yesCount = quizAnswers.filter(answer => answer === true).length;
   let result;
@@ -68,26 +75,24 @@ const ResultPage = ({ setPage, quizAnswers }) => {
 
   // Contact functions
   const handleCallDoctor = () => {
-    const phoneNumber = "+1234567890"; // Replace with actual doctor's number
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // Mobile device
-      window.location.href = `tel:${phoneNumber}`;
+      window.location.href = `tel:${DOCTOR_INFO.phone}`;
     } else {
       // PC - show number and instructions
-      alert(`Please call: ${phoneNumber}\n\nOn mobile devices, this would automatically open your dialer.`);
+      alert(`Please call: ${DOCTOR_INFO.phone}\n\nDoctor: ${DOCTOR_INFO.name}\nClinic: ${DOCTOR_INFO.clinic}\n\nOn mobile devices, this would automatically open your dialer.`);
     }
   };
 
   const handleMessageDoctor = () => {
-    const phoneNumber = "+1234567890"; // Replace with actual doctor's number
-    const message = "Hello, I need to schedule an appointment regarding photosensitivity concerns from the assessment.";
+    const message = `Hello, I need to schedule an appointment regarding photosensitivity concerns from the assessment. My result: ${result.stage}`;
     
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // Mobile device
-      window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+      window.location.href = `sms:${DOCTOR_INFO.phone}?body=${encodeURIComponent(message)}`;
     } else {
       // PC - show instructions
-      alert(`To message the doctor:\n\nNumber: ${phoneNumber}\nMessage: ${message}\n\nOn mobile devices, this would automatically open your messaging app.`);
+      alert(`To message the doctor:\n\nNumber: ${DOCTOR_INFO.phone}\nDoctor: ${DOCTOR_INFO.name}\nClinic: ${DOCTOR_INFO.clinic}\nMessage: ${message}\n\nOn mobile devices, this would automatically open your messaging app.`);
     }
   };
 
@@ -117,42 +122,46 @@ const ResultPage = ({ setPage, quizAnswers }) => {
           <h3 className="treatment-title">Suggested Next Steps</h3>
           <p className="treatment-text">{result.treatment}</p>
           
-          {result === STAGE_MAPPING.critical ? (
-            <div className="critical-contact-section">
-              <div className="doctor-info">
-                <h4 className="contact-title">🚨 Immediate Medical Attention Recommended</h4>
-                <p className="contact-message">
-                  Based on your assessment results, we strongly recommend contacting a healthcare professional immediately for proper diagnosis and treatment.
-                </p>
-                
-                <div className="contact-options">
-                  <motion.button
-                    onClick={handleCallDoctor}
-                    className="contact-button call-button"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Phone size={20} className="button-icon" />
-                    Call Healthcare Provider
-                  </motion.button>
-                  
-                  <motion.button
-                    onClick={handleMessageDoctor}
-                    className="contact-button message-button"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <MessageCircle size={20} className="button-icon" />
-                    Message Healthcare Provider
-                  </motion.button>
-                </div>
-                
-                <p className="contact-disclaimer">
-                  Note: These contact options will connect you with our recommended healthcare provider. On mobile devices, they will open your phone dialer and messaging app automatically.
-                </p>
+          {/* Doctor Contact Section for ALL stages */}
+          <div className="doctor-contact-section">
+            <div className="doctor-info">
+              <h4 className="contact-title">👨‍⚕️ Recommended Healthcare Provider</h4>
+              <div className="doctor-details">
+                <p><strong>Name:</strong> {DOCTOR_INFO.name}</p>
+                <p><strong>Clinic:</strong> {DOCTOR_INFO.clinic}</p>
+                <p><strong>Phone:</strong> {DOCTOR_INFO.phone}</p>
               </div>
+              
+              <div className="contact-options">
+                <motion.button
+                  onClick={handleCallDoctor}
+                  className="contact-button call-button"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Phone size={20} className="button-icon" />
+                  Call Doctor
+                </motion.button>
+                
+                <motion.button
+                  onClick={handleMessageDoctor}
+                  className="contact-button message-button"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <MessageCircle size={20} className="button-icon" />
+                  Message Doctor
+                </motion.button>
+              </div>
+              
+              <p className="contact-disclaimer">
+                Note: These contact options will connect you with {DOCTOR_INFO.name}. On mobile devices, they will open your phone dialer and messaging app automatically.
+              </p>
             </div>
-          ) : (
+          </div>
+
+          {/* Medications Section for non-critical stages */}
+          {result !== STAGE_MAPPING.critical && (
             <div className="medications-section">
               <h4 className="medications-title">
                 {result === STAGE_MAPPING.mild ? "Topical Options (Over-the-counter):" : "Oral OTC Options (for itching or allergic-type reaction):"}

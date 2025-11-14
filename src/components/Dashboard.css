@@ -48,7 +48,7 @@
 }
 
 .close-button {
-  padding: 0.75rem;
+  padding: 1rem; /* Increased padding */
   border-radius: 50%;
   background: linear-gradient(135deg, #ffffff, #f9fafb);
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -58,14 +58,22 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+  width: 50px; /* Fixed width */
+  height: 50px; /* Fixed height */
 }
 
 .close-button:hover {
-  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  background: linear-gradient(135deg, #fef2f2, #fee2e2); /* Red tint on hover */
   transform: rotate(90deg) scale(1.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  color: #374151;
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  color: #dc2626; /* Red color on hover */
+  border-color: #fecaca; /* Light red border on hover */
+}
+
+.close-button svg {
+  width: 28px; /* Larger icon */
+  height: 28px; /* Larger icon */
 }
 
 .dashboard-welcome h1 {
